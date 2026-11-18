@@ -3,6 +3,14 @@
 
 ---
 
+**Student Name:** Vignesh K  
+**BITS ID:** 2026CT05053  
+**Course:** Machine Learning  
+**Submission Date:** November 2026   
+**GitHub Repo:** [https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2](https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2)
+
+---
+
 ## 1. Problem Statement
 
 Customer churn is one of the most critical challenges facing the telecommunications industry. Acquiring a new customer is estimated to be 5 to 25 times more expensive than retaining an existing customer. When a subscriber terminates their service or switches to a competitor, the service provider loses recurring subscription revenues, cross-selling opportunities, and past customer acquisition investments.
