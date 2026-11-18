@@ -201,9 +201,9 @@ All five required classification algorithms were implemented on the identical pr
 
 ## 8. Screenshot of Assignment Execution on BITS Virtual Lab
 
-[Problem Statement Screenshot from Pragyoshala Lab](Lab-screenshots/Problem%20Statement.png)]
+![Problem Statement Screenshot from Pragyoshala Lab](Lab-screenshots/Problem%20Statement.png)
 
-[Model Execution with Metrics Screenshot](Lab-screenshots/Model%20Execution%20and%20Metrics.png)]
+![Model Execution with Metrics Screenshot](Lab-screenshots/Model%20Execution%20and%20Metrics.png)
 
 ---
 
