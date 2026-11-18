@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.14" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      color: light-dark(#1a1a1a, #fdfdfd);
+      background-color: #fdfdfd;
+      background-color: light-dark(#fdfdfd, #1a1a1a);
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a, a:visited {
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid;
+      border-color: #e6e6e6;
+      border-color: light-dark(#e6e6e6, #4c4c4c);
+      color: #606060;
+      color: light-dark(#606060, #b6b6b6);
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid currentColor;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+    }
+    th {
+      border-top: 1px solid currentColor;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    em, em em em, em em em em em {
+      font-style: italic;
+    }
+    em em, em em em em {
+      font-style: normal;
+    }
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    @media print {
+      html {
+        color-scheme: light only;
+      }
+      html, body, pre, code {
+        background-color: transparent;
+      }
+      body, a, a:visited, blockquote {
+        color: black;
+      }
+      pre, code {
+        padding: 0;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }  </style>
+</head>
+<body>
+<h1 id="bits-pilani---m.tech-aiml-machine-learning-assignment-2">BITS
+Pilani - M.Tech (AIML) Machine Learning Assignment 2</h1>
+<h2 id="telco-customer-churn-classification-analysis">Telco Customer
+Churn Classification Analysis</h2>
+<hr />
+<h2 id="problem-statement">1. Problem Statement</h2>
+<p>Customer churn is one of the most critical challenges facing the
+telecommunications industry. Acquiring a new customer is estimated to be
+5 to 25 times more expensive than retaining an existing customer. When a
+subscriber terminates their service or switches to a competitor, the
+service provider loses recurring subscription revenues, cross-selling
+opportunities, and past customer acquisition investments.</p>
+<p>The primary objective of this project is to build and benchmark
+<strong>five supervised machine learning classification models</strong>
+to predict whether a telecom customer is likely to churn
+(<code>Churn = 'Yes'</code>) or remain subscribed
+(<code>Churn = 'No'</code>). By accurately identifying customers at high
+risk of attrition, telecom business leaders and marketing retention
+teams can: 1. Target proactive, tailored retention interventions (e.g.,
+customized contract discounts, loyalty perks, technical support
+outreach). 2. Prioritize high-value accounts that show indicators of
+dissatisfaction or high monthly billing stress. 3. Optimize operational
+retention expenditures by focusing customer success resources on genuine
+at-risk subscribers.</p>
+<hr />
+<h2 id="dataset-description">2. Dataset Description</h2>
+<p>The dataset utilized for this study is the widely recognized
+<strong>Telco Customer Churn</strong> dataset provided by IBM via
+Kaggle.</p>
+<ul>
+<li><strong>Dataset Source:</strong> <a
+href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn">Telco
+Customer Churn (IBM / Kaggle)</a></li>
+<li><strong>Local File Path:</strong>
+<code>Dataset/WA_Fn-UseC_-Telco-Customer-Churn.csv</code></li>
+<li><strong>Total Number of Instances:</strong> 7,043 customer
+records</li>
+<li><strong>Total Features:</strong> 20 feature attributes + 1
+non-predictive customer ID (<code>customerID</code>) = 21 columns</li>
+<li><strong>Target Variable:</strong> <code>Churn</code> (Binary:
+<code>"Yes"</code> = 1, <code>"No"</code> = 0)</li>
+<li><strong>Class Distribution:</strong>
+<ul>
+<li><code>No</code> (Retained customers): <strong>5,174 instances
+(73.46%)</strong></li>
+<li><code>Yes</code> (Churned customers): <strong>1,869 instances
+(26.54%)</strong></li>
+<li><strong>Class Imbalance:</strong> Noticeable imbalance with a ratio
+of approximately <strong>2.77 : 1</strong> (majority to minority).
+Handled using stratified train-test splitting and robust evaluation
+metrics (AUC, MCC, and F1-score).</li>
+</ul></li>
+</ul>
+<h3 id="feature-breakdown-by-domain">Feature Breakdown by Domain:</h3>
+<ol type="1">
+<li><strong>Demographic Features (4 features):</strong>
+<ul>
+<li><code>gender</code>: Customer gender (<code>Male</code>,
+<code>Female</code>)</li>
+<li><code>SeniorCitizen</code>: Whether the customer is a senior citizen
+(<code>0</code> = No, <code>1</code> = Yes)</li>
+<li><code>Partner</code>: Whether the customer has a domestic partner
+(<code>Yes</code>, <code>No</code>)</li>
+<li><code>Dependents</code>: Whether the customer lives with dependents
+(<code>Yes</code>, <code>No</code>)</li>
+</ul></li>
+<li><strong>Subscribed Telecom Services (9 features):</strong>
+<ul>
+<li><code>PhoneService</code>: Whether phone service is active
+(<code>Yes</code>, <code>No</code>)</li>
+<li><code>MultipleLines</code>: Multiple phone lines (<code>Yes</code>,
+<code>No</code>, <code>No phone service</code>)</li>
+<li><code>InternetService</code>: Internet service type
+(<code>DSL</code>, <code>Fiber optic</code>, <code>No</code>)</li>
+<li><code>OnlineSecurity</code>: Add-on online security
+(<code>Yes</code>, <code>No</code>,
+<code>No internet service</code>)</li>
+<li><code>OnlineBackup</code>: Cloud/online backup service
+(<code>Yes</code>, <code>No</code>,
+<code>No internet service</code>)</li>
+<li><code>DeviceProtection</code>: Equipment warranty protection
+(<code>Yes</code>, <code>No</code>,
+<code>No internet service</code>)</li>
+<li><code>TechSupport</code>: Technical support add-on
+(<code>Yes</code>, <code>No</code>,
+<code>No internet service</code>)</li>
+<li><code>StreamingTV</code>: Streaming television package
+(<code>Yes</code>, <code>No</code>,
+<code>No internet service</code>)</li>
+<li><code>StreamingMovies</code>: Streaming movie package
+(<code>Yes</code>, <code>No</code>,
+<code>No internet service</code>)</li>
+</ul></li>
+<li><strong>Account &amp; Contractual Features (6 features):</strong>
+<ul>
+<li><code>tenure</code>: Number of months the customer has been with the
+provider (Numeric: 0 to 72)</li>
+<li><code>Contract</code>: Commitment terms
+(<code>Month-to-month</code>, <code>One year</code>,
+<code>Two year</code>)</li>
+<li><code>PaperlessBilling</code>: Paperless billing enrollment
+(<code>Yes</code>, <code>No</code>)</li>
+<li><code>PaymentMethod</code>: Billing payment channel
+(<code>Electronic check</code>, <code>Mailed check</code>,
+<code>Bank transfer (automatic)</code>,
+<code>Credit card (automatic)</code>)</li>
+<li><code>MonthlyCharges</code>: Monthly bill amount in USD (Numeric:
+$18.25 to $118.75)</li>
+<li><code>TotalCharges</code>: Cumulative charges over account lifetime
+in USD (Numeric: $18.80 to $8,684.80)</li>
+</ul></li>
+</ol>
+<h3
+id="exploratory-data-analysis-feature-relationships-before-preprocessing">Exploratory
+Data Analysis &amp; Feature Relationships (Before Preprocessing):</h3>
+<p>To build rigorous domain intuition and validate feature relevance
+prior to model training, a 6-panel exploratory relationship dashboard
+was generated:</p>
+<figure>
+<img src="plots/eda_relationships.png" alt="EDA Relationships" />
+<figcaption aria-hidden="true">EDA Relationships</figcaption>
+</figure>
+<h4 id="key-exploratory-insights">Key Exploratory Insights:</h4>
+<ol type="1">
+<li><strong>Contract Type is the Dominant Churn Catalyst:</strong>
+Customers on <strong>Month-to-month contracts</strong> experience an
+alarming <strong>42.7% churn rate</strong>, whereas customers on
+<strong>One-year contracts (11.3%)</strong> and <strong>Two-year
+contracts (2.8%)</strong> show exceptional retention loyalty.</li>
+<li><strong>First-Year Hazard Spike (Tenure):</strong> Churn is heavily
+concentrated within the first <strong>1 to 12 months</strong> of service
+(prominent early spike in KDE distribution). Beyond 24 months, customer
+retention stabilizes significantly.</li>
+<li><strong>Fiber Optic &amp; Pricing Sensitivity:</strong> High monthly
+charges ($70 - $105) strongly correlate with churn. Specifically,
+<strong>Fiber Optic</strong> subscribers churn at <strong>41.9%</strong>
+(compared to DSL at 19.0%), indicating customer price sensitivity when
+high-speed internet lacks bundled security or technical support.</li>
+<li><strong>Correlation Dynamics:</strong> <code>tenure</code> is
+negatively correlated with churn
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mi>−</mi><mn>0.35</mn></mrow><annotation encoding="application/x-tex">r = -0.35</annotation></semantics></math>),
+while <code>MonthlyCharges</code> is positively correlated
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mi>+</mi><mn>0.19</mn></mrow><annotation encoding="application/x-tex">r = +0.19</annotation></semantics></math>).
+<code>TotalCharges</code> is collinear with <code>tenure</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>0.83</mn></mrow><annotation encoding="application/x-tex">r = 0.83</annotation></semantics></math>),
+justifying the need for regularized models.</li>
+</ol>
+<hr />
+<h2 id="github-repository-link">3. GitHub Repository Link</h2>
+<ul>
+<li><strong>GitHub Repository URL:</strong> <a
+href="https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2">https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2</a></li>
+</ul>
+<h3 id="repository-directory-structure">Repository Directory
+Structure:</h3>
+<pre class="text"><code>ML-CTS-Assignment-2/
+│
+├── requirements.txt            # Python dependencies (scikit-learn, pandas, numpy, etc.)
+├── README.md                   # Comprehensive assignment documentation &amp; report
+├── test_data.csv               # 20% test partition used across all experiments (1,409 rows)
+│
+├── Dataset/
+│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Raw dataset (7,043 rows)
+│
+├── Assignment-instructions/
+│   └── ML_Assignment_2-Cognizant.docx        # Official assignment problem document
+│
+├── model/
+│   ├── train_and_evaluate.py   # Automated end-to-end Python pipeline
+│   ├── telco_churn_model.ipynb # Interactive Jupyter Notebook for BITS Virtual Lab
+│   ├── metrics_comparison.csv  # Computed evaluation metrics table in CSV
+│   ├── preprocessor.pkl        # Fitted ColumnTransformer (StandardScaler + OneHotEncoder)
+│   ├── logistic_regression.pkl # Serialized Logistic Regression model
+│   ├── decision_tree.pkl       # Serialized Decision Tree model
+│   ├── knn.pkl                 # Serialized kNN model
+│   ├── naive_bayes.pkl         # Serialized Gaussian Naive Bayes model
+│   └── random_forest_ensemble.pkl # Serialized Random Forest model
+│
+└── plots/
+    ├── eda_relationships.png   # 6-panel exploratory relationship dashboard
+    ├── metrics_comparison.png  # Grouped bar chart comparing all 6 metrics
+    ├── roc_curves.png          # ROC curves and AUC scores for all 5 models
+    └── confusion_matrices.png  # Confusion matrices across all 5 models on test set</code></pre>
+<hr />
+<h2 id="data-preprocessing-methodology">4. Data Preprocessing &amp;
+Methodology</h2>
+<p>All data preprocessing operations adhere strictly to statistical best
+practices and prevent <strong>data leakage</strong>:</p>
+<ol type="1">
+<li><strong>Identifier Elimination:</strong> Dropped
+<code>customerID</code> as it is an arbitrary primary key with no
+generalizable predictive value.</li>
+<li><strong>Missing Value Treatment:</strong>
+<ul>
+<li>The <code>TotalCharges</code> feature had <strong>11 blank string
+entries</strong> (<code>" "</code>) belonging to newly registered
+subscribers with <code>tenure = 0</code>.</li>
+<li>Converted the column to float using
+<code>pd.to_numeric(..., errors='coerce')</code> and imputed missing
+values with <code>0.0</code> (reflecting zero accumulated charges for
+tenure 0).</li>
+</ul></li>
+<li><strong>Duplicate Verification:</strong> Checked and confirmed
+<code>0</code> duplicate rows in the dataset.</li>
+<li><strong>Stratified Train-Test Split (80:20):</strong>
+<ul>
+<li>Performed an 80:20 train-test split (<code>test_size=0.20</code>,
+<code>random_state=42</code>) with <code>stratify=y</code>.</li>
+<li>Resulting split: <strong>Training set = 5,634 instances</strong>;
+<strong>Test set = 1,409 instances</strong>.</li>
+<li>Class ratios were precisely preserved: 26.54% churn in both training
+(1,495 churners) and test (374 churners).</li>
+<li>Exported the raw test split to <code>test_data.csv</code> in the
+root repository.</li>
+</ul></li>
+<li><strong>Leak-Free Transformation Pipeline
+(<code>ColumnTransformer</code>):</strong>
+<ul>
+<li><strong>Numerical Features</strong> (<code>tenure</code>,
+<code>MonthlyCharges</code>, <code>TotalCharges</code>): Scaled using
+<code>StandardScaler</code> to zero mean and unit variance.</li>
+<li><strong>Categorical Features</strong> (16 variables): Encoded using
+<code>OneHotEncoder(drop='first', sparse_output=False)</code> to prevent
+the dummy variable trap.</li>
+<li><strong>Data Leakage Safeguard:</strong> All encoders and scalers
+were <strong>strictly fitted on the training split only</strong>
+(<code>fit_transform(X_train)</code>), and then used to transform the
+test split (<code>transform(X_test)</code>).</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="models-used-evaluation-metrics-comparison-table">5. Models Used
+&amp; Evaluation Metrics Comparison Table</h2>
+<p>All five required classification algorithms were implemented on the
+identical preprocessed training split and evaluated on the held-out test
+split
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>409</mn></mrow><annotation encoding="application/x-tex">N=1,409</annotation></semantics></math>).</p>
+<h3 id="hyperparameter-design-rationale-configurations">Hyperparameter
+Design Rationale &amp; Configurations:</h3>
+<ol type="1">
+<li><strong>Logistic Regression (<code>penalty='l2'</code>,
+<code>C=1.0</code>, <code>solver='lbfgs'</code>):</strong>
+<ul>
+<li><em>Why L2 Regularization?</em> The dataset exhibits high
+inter-feature collinearity—notably between <code>tenure</code> and
+<code>TotalCharges</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>0.83</mn></mrow><annotation encoding="application/x-tex">r = 0.83</annotation></semantics></math>)
+along with overlapping one-hot encoded service dummy variables. L2 Ridge
+penalty
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false" form="postfix">∥</mo><mi mathvariant="bold-italic">𝒘</mi><msubsup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">\frac{1}{2} \|\mathbf{w}\|_2^2</annotation></semantics></math>)
+smoothly shrinks weights toward zero without zeroing them out,
+stabilizing parameter estimation, preventing individual features from
+dominating, and ensuring steady gradient convergence with
+<code>lbfgs</code>.</li>
+</ul></li>
+<li><strong>Decision Tree (<code>max_depth=5</code>,
+<code>min_samples_leaf=10</code>,
+<code>min_samples_split=20</code>):</strong>
+<ul>
+<li><em>Why Depth Constraint?</em> Unconstrained decision trees split
+recursively until pure leaves are formed, memorizing training noise
+(overfitting). Restricting depth to 5 acts as pre-pruning regularization
+(bounding leaves to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>32</mn></mrow><annotation encoding="application/x-tex">\le 32</annotation></semantics></math>)
+and preserves business interpretability, generating clear rule
+hierarchies (e.g., month-to-month contracts
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+low tenure
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+fiber optic).</li>
+</ul></li>
+<li><strong>K-Nearest Neighbors (<code>n_neighbors=7</code>,
+<code>metric='minkowski'</code>, <code>p=2</code>):</strong>
+<ul>
+<li><em>Why
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">k=7</annotation></semantics></math>?</em>
+Balances the bias-variance tradeoff in 30-dimensional standardized
+feature space. Very low
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">k=1, 3</annotation></semantics></math>)
+is overly sensitive to noisy outliers (high variance), while large
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>≥</mo><mn>25</mn></mrow><annotation encoding="application/x-tex">k \ge 25</annotation></semantics></math>)
+allows the 73.5% majority class (“No Churn”) to swamp local
+neighborhoods (high bias, poor recall). Choosing an odd integer
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">k=7</annotation></semantics></math>)
+also strictly eliminates 50/50 voting ties.</li>
+</ul></li>
+<li><strong>Naive Bayes (<code>GaussianNB</code>):</strong>
+<ul>
+<li>Serves as the probabilistic baseline under class-conditional feature
+independence assumptions.</li>
+</ul></li>
+<li><strong>Random Forest Ensemble (<code>n_estimators=100</code>,
+<code>max_depth=10</code>, <code>min_samples_leaf=4</code>):</strong>
+<ul>
+<li>Aggregates 100 decorrelated trees with random feature subsampling
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mi>D</mi></msqrt><annotation encoding="application/x-tex">\sqrt{D}</annotation></semantics></math>),
+reducing individual tree variance and capturing non-linear feature
+interactions without overfitting.</li>
+</ul></li>
+</ol>
+<h3 id="comparison-table">Comparison Table:</h3>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">ML Model Name</th>
+<th style="text-align: center;">Accuracy</th>
+<th style="text-align: center;">AUC</th>
+<th style="text-align: center;">Precision</th>
+<th style="text-align: center;">Recall</th>
+<th style="text-align: center;">F1</th>
+<th style="text-align: center;">MCC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Logistic Regression</strong></td>
+<td style="text-align: center;"><strong>0.8062</strong></td>
+<td style="text-align: center;"><strong>0.8422</strong></td>
+<td style="text-align: center;"><strong>0.6593</strong></td>
+<td style="text-align: center;"><strong>0.5588</strong></td>
+<td style="text-align: center;"><strong>0.6049</strong></td>
+<td style="text-align: center;"><strong>0.4806</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Decision Tree</strong></td>
+<td style="text-align: center;">0.7956</td>
+<td style="text-align: center;">0.8270</td>
+<td style="text-align: center;">0.6335</td>
+<td style="text-align: center;">0.5455</td>
+<td style="text-align: center;">0.5862</td>
+<td style="text-align: center;">0.4537</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>kNN</strong></td>
+<td style="text-align: center;">0.7708</td>
+<td style="text-align: center;">0.8032</td>
+<td style="text-align: center;">0.5706</td>
+<td style="text-align: center;">0.5508</td>
+<td style="text-align: center;">0.5605</td>
+<td style="text-align: center;">0.4057</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Naive Bayes</strong></td>
+<td style="text-align: center;">0.6558</td>
+<td style="text-align: center;">0.8092</td>
+<td style="text-align: center;">0.4269</td>
+<td style="text-align: center;"><strong>0.8663</strong></td>
+<td style="text-align: center;">0.5719</td>
+<td style="text-align: center;">0.3951</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Random Forest
+(Ensemble)</strong></td>
+<td style="text-align: center;"><strong>0.8034</strong></td>
+<td style="text-align: center;"><strong>0.8434</strong></td>
+<td style="text-align: center;"><strong>0.6667</strong></td>
+<td style="text-align: center;">0.5187</td>
+<td style="text-align: center;">0.5835</td>
+<td style="text-align: center;">0.4636</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes on Metric Definitions:</em> - <strong>Accuracy:</strong>
+Overall proportion of correct predictions
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi><mo>+</mo><mi>F</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac><annotation encoding="application/x-tex">\frac{TP+TN}{TP+TN+FP+FN}</annotation></semantics></math>).
+- <strong>AUC (Area Under ROC Curve):</strong> Measures ranking ability
+across all potential decision thresholds. - <strong>Precision:</strong>
+Proportion of identified churners that truly churned
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac><annotation encoding="application/x-tex">\frac{TP}{TP+FP}</annotation></semantics></math>).
+- <strong>Recall:</strong> Proportion of actual churners successfully
+identified by the model
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac><annotation encoding="application/x-tex">\frac{TP}{TP+FN}</annotation></semantics></math>).
+- <strong>F1 Score:</strong> Harmonic mean of precision and recall
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>⋅</mo><mfrac><mrow><mtext mathvariant="normal">Precision</mtext><mo>⋅</mo><mtext mathvariant="normal">Recall</mtext></mrow><mrow><mtext mathvariant="normal">Precision</mtext><mo>+</mo><mtext mathvariant="normal">Recall</mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}</annotation></semantics></math>).
+- <strong>MCC (Matthews Correlation Coefficient):</strong> Balanced
+metric ranging from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>+</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">+1</annotation></semantics></math>,
+providing the most reliable quality measure on imbalanced data.</p>
+<hr />
+<h2 id="visualization-form-graph-representation">6. Visualization Form
+(Graph Representation)</h2>
+<h3
+id="performance-comparison-across-all-6-metrics-grouped-bar-chart">6.1
+Performance Comparison Across All 6 Metrics (Grouped Bar Chart)</h3>
+<figure>
+<img src="plots/metrics_comparison.png" alt="Metrics Comparison" />
+<figcaption aria-hidden="true">Metrics Comparison</figcaption>
+</figure>
+<h3 id="receiver-operating-characteristic-roc-curves">6.2 Receiver
+Operating Characteristic (ROC) Curves</h3>
+<figure>
+<img src="plots/roc_curves.png" alt="ROC Curves" />
+<figcaption aria-hidden="true">ROC Curves</figcaption>
+</figure>
+<h3 id="confusion-matrices-on-test-set-n1409">6.3 Confusion Matrices on
+Test Set
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>409</mn></mrow><annotation encoding="application/x-tex">N=1,409</annotation></semantics></math>)</h3>
+<figure>
+<img src="plots/confusion_matrices.png" alt="Confusion Matrices" />
+<figcaption aria-hidden="true">Confusion Matrices</figcaption>
+</figure>
+<hr />
+<h2 id="observations-on-model-performance">7. Observations on Model
+Performance</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">ML Model Name</th>
+<th style="text-align: left;">Observation about model performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Logistic Regression</strong></td>
+<td style="text-align: left;">Achieves the highest test <strong>Accuracy
+(80.62%)</strong>, highest <strong>F1-Score (0.6049)</strong>, and
+highest <strong>MCC (0.4806)</strong> alongside a strong <strong>AUC of
+0.8422</strong>. L2 regularization handles the 30-dimensional
+standardized feature space effectively, preventing overfitting. Because
+customer churn is strongly driven by additive economic indicators (e.g.,
+month-to-month contracts and fiber optic pricing), the linear decision
+boundary provides well-calibrated probabilities.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Decision Tree</strong></td>
+<td style="text-align: left;">Attains competitive <strong>Accuracy
+(79.56%)</strong> and an <strong>AUC of 0.8270</strong> when constrained
+to <code>max_depth=5</code> and <code>min_samples_leaf=10</code>. It
+provides transparent interpretability, prioritizing contract type
+(<code>Contract_Month-to-month</code>) and tenure as primary root
+splits. However, without ensembling, individual decision boundaries
+suffer from orthogonal axis limitations and higher variance.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>kNN</strong></td>
+<td style="text-align: left;">Delivers an <strong>Accuracy of
+77.08%</strong> and <strong>AUC of 0.8032</strong> with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">k=7</annotation></semantics></math>.
+While standard scaling ensures numerical distance parity, the model
+experiences mild performance degradation due to the curse of
+dimensionality across 30 one-hot encoded binary features. Test-time
+prediction is also computationally intensive
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>N</mi><mo>⋅</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(N \cdot D)</annotation></semantics></math>)
+compared to parametric models.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Naive Bayes</strong></td>
+<td style="text-align: left;">Demonstrates the single highest
+<strong>Recall (86.63%)</strong>, capturing 324 out of 374 actual
+churners. However, it suffers from poor <strong>Precision
+(42.69%)</strong> and the lowest <strong>Accuracy (65.58%)</strong>. The
+core assumption of conditional feature independence given the class
+label is violated by strong inter-feature correlations (e.g., tenure,
+MonthlyCharges, TotalCharges, streaming services), leading to severe
+probability overestimation for the churn class.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Random Forest
+(Ensemble)</strong></td>
+<td style="text-align: left;">Achieves the highest discrimination
+capability with an <strong>AUC of 0.8434</strong> and top
+<strong>Precision (66.67%)</strong>, with a strong <strong>Accuracy of
+0.8034</strong> and <strong>MCC of 0.4636</strong>. By aggregating 100
+decorrelated decision trees with feature subsampling, it captures subtle
+non-linear interactions (e.g., high charges combined with lack of
+technical support) while mitigating individual tree variance.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="overall-winner-for-the-telco-churn-dataset">Overall Winner for
+the Telco Churn Dataset</h3>
+<p><strong>Overall Winner:</strong> <strong>Logistic Regression</strong>
+<em>(with <strong>Random Forest</strong> as a near-tied ensemble
+runner-up)</em>.</p>
+<h4 id="in-depth-justification">In-Depth Justification:</h4>
+<ol type="1">
+<li><strong>Superiority on Balanced Quality Metrics:</strong> In
+imbalanced classification (26.54% churn), accuracy alone is misleading.
+Logistic Regression leads across the most critical balanced metrics:
+<strong>MCC (0.4806 vs. 0.4636)</strong> and <strong>F1-Score (0.6049
+vs. 0.5835)</strong>. Matthews Correlation Coefficient is widely
+recognized as the single most robust metric when evaluating true
+positives, false positives, true negatives, and false negatives
+simultaneously.</li>
+<li><strong>Exceptional Discrimination (AUC):</strong> Logistic
+Regression achieves an <strong>AUC of 0.8422</strong>, closely matching
+Random Forest’s <strong>0.8434</strong>, demonstrating that its
+probability outputs are calibrated for threshold tuning depending on
+business campaign budgets.</li>
+<li><strong>Business Interpretability &amp; Operational
+Actionability:</strong> For telecommunication providers, model
+explainability is paramount. Logistic Regression coefficients provide
+direct log-odds interpretations:
+<ul>
+<li><strong>Key Churn Catalysts:</strong> Month-to-month contracts,
+fiber optic internet without technical support, and electronic check
+payments drastically increase churn probability.</li>
+<li><strong>Key Retention Catalysts:</strong> Long tenure, two-year
+contracts, and bundled security services decrease churn probability.
+Marketing teams can directly convert these coefficients into clear
+customer intervention playbooks.</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="screenshot-of-assignment-execution-on-bits-virtual-lab">8.
+Screenshot of Assignment Execution on BITS Virtual Lab</h2>
+<figure>
+<img src="Lab-screenshots/Problem%20Statement.png"
+alt="Problem Statement Screenshot from Pragyoshala Lab" />
+<figcaption aria-hidden="true">Problem Statement Screenshot from
+Pragyoshala Lab</figcaption>
+</figure>
+<figure>
+<img src="Lab-screenshots/Model%20Execution%20and%20Metrics.png"
+alt="Model Execution with Metrics Screenshot" />
+<figcaption aria-hidden="true">Model Execution with Metrics
+Screenshot</figcaption>
+</figure>
+<hr />
+<h2 id="how-to-replicate-and-run-the-code">9. How to Replicate and Run
+the Code</h2>
+<h3 id="clone-the-repository">1. Clone the Repository</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2.git</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ML-CTS-Assignment-2</span></code></pre></div>
+<h3 id="install-dependencies">2. Install Dependencies</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code></pre></div>
+<h3 id="run-the-automated-training-evaluation-script">3. Run the
+Automated Training &amp; Evaluation Script</h3>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> model/train_and_evaluate.py</span></code></pre></div>
+<h3 id="run-via-jupyter-notebook">4. Run via Jupyter Notebook</h3>
+<p>Launch JupyterLab or notebook server:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook model/telco_churn_model.ipynb</span></code></pre></div>
+<p>Execute all cells sequentially to regenerate all metrics, models, and
+visual plots.</p>
+</body>
+</html>
