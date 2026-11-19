@@ -2,13 +2,24 @@
 ## Telco Customer Churn Classification Analysis
 
 ---
-
 **Student Name:** Vignesh K  
 **BITS ID:** 2026CT05053  
 **Course:** Machine Learning  
-**Submission Date:** November 2026 
+**Submission Date:** November 2026   
+**GitHub Repo:** [https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2](https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2)
 
 ---
+
+### Lab Screenshots
+
+![Problem Statement ScreenShot - Lab](Lab-Screenshots/Problem%20Statement.png)
+
+![Model Exceution and metrics on Lab](Lab-Screenshots/Model%20Execution%20and%20Metrics.png)
+
+![Models Executed in terminal - Lab](Lab-Screenshots/Executed%20as%20py%20file.png)
+---
+
+### README
 
 ## 1. Problem Statement
 
