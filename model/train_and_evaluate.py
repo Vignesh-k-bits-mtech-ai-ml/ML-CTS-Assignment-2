@@ -57,7 +57,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 
-# Set reproducibility seed (unique seed to ensure originality)
+# Set reproducibility seed 
 RANDOM_STATE = 2026
 
 def load_data(data_path: str) -> pd.DataFrame:

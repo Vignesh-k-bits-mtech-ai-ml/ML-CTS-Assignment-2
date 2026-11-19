@@ -142,7 +142,7 @@ All data preprocessing operations adhere strictly to statistical best practices 
    - The `TotalCharges` feature had **11 blank string entries** (`" "`) belonging to newly registered subscribers with `tenure = 0`.
    - Converted the column to float using `pd.to_numeric(..., errors='coerce')` and imputed missing values with `0.0` (reflecting zero accumulated charges for tenure 0).
 4. **Stratified Train-Test Split (80:20 with unique seed):**
-   - Performed an 80:20 train-test split (`test_size=0.20`, student-specific `random_state=2026`) with `stratify=y`.
+   - Performed an 80:20 train-test split (`test_size=0.20`, `random_state=2026`) with `stratify=y`.
    - Resulting split: **Training set = 5,616 instances**; **Test set = 1,405 instances**.
    - Class ratios were precisely preserved: 26.48% churn in both training (1,485 churners) and test (372 churners).
    - Exported the raw test split to `test_data.csv` in the root repository.
