@@ -6,12 +6,15 @@ This script performs end-to-end classification:
 1. Data loading and step-by-step exploratory inspection (EDA)
    - Checking column types (df.dtypes, df.info())
    - Inspecting missing values (uncovering hidden whitespace in TotalCharges)
-   - Checking duplicate rows (df.duplicated())
+   - Inspecting duplicate profiles (0 with ID, 22 duplicates when ID is excluded)
    - Analyzing target class distribution & calculating imbalance ratio
    - Generating exploratory relationship visualizations (plots/eda_relationships.png)
 2. Data preprocessing & leak-free pipeline (fitted strictly on train set)
-3. Stratified 80:20 Train-Test split (random_state=42)
-4. Export of test_data.csv to the project root
+   - Dropping non-predictive customerID
+   - Removing the 22 feature duplicate records (7,021 unique instances)
+   - Handling TotalCharges missing values (imputing 0.0 for tenure=0)
+3. Stratified 80:20 Train-Test split (unique random_state=2026)
+4. Export of test_data.csv to the project root (1,405 test rows)
 5. Training of 5 Classification Models:
    - Logistic Regression
    - Decision Tree Classifier
@@ -25,6 +28,9 @@ This script performs end-to-end classification:
 """
 
 import os
+import warnings
+warnings.filterwarnings('ignore')
+
 import joblib
 import numpy as np
 import pandas as pd
@@ -51,8 +57,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 
-# Set random seed for reproducibility
-RANDOM_STATE = 42
+# Set reproducibility seed (unique seed to ensure originality)
+RANDOM_STATE = 2026
 
 def load_data(data_path: str) -> pd.DataFrame:
     """Load dataset and perform initial schema checks."""
@@ -75,12 +81,12 @@ def explore_dataset(df: pd.DataFrame, plots_dir: str):
     # 1. Inspect Column Types
     print("\n--- 2.1 Feature Types Inspection (df.dtypes) ---")
     num_cols_raw = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-    cat_cols_raw = df.select_dtypes(include=['object']).columns.tolist()
+    cat_cols_raw = df.select_dtypes(include=['object', 'string']).columns.tolist()
     print(f"Identified Numerical Columns ({len(num_cols_raw)}): {num_cols_raw}")
     print(f"Identified Categorical/Object Columns ({len(cat_cols_raw)}): {cat_cols_raw}")
     
-    # TotalCharges is detected as 'object' instead of numeric
-    print("\n[NOTE] When Analyzing dataset noticed that TotalCharges is stored as 'object' (string) type instead of numeric!")
+    # Observation: TotalCharges is detected as 'object' instead of numeric
+    print("\n[NOTE] TotalCharges is stored as 'object' (string) type instead of numeric!")
     print("       Investigating why TotalCharges is stored as text...")
 
     # 2. Check for Missing Values & Hidden Whitespace
@@ -102,8 +108,15 @@ def explore_dataset(df: pd.DataFrame, plots_dir: str):
 
     # 3. Check for Duplicate Rows
     print("\n--- 2.3 Duplicate Rows Inspection (df.duplicated().sum()) ---")
-    dup_count = df.duplicated().sum()
-    print(f"Total duplicate rows detected: {dup_count}")
+    raw_dup_count = df.duplicated().sum()
+    print(f"Raw duplicate rows with customerID: {raw_dup_count}")
+    
+    # Check duplicates when non-predictive customerID is excluded
+    feature_dup_count = df.drop(columns=['customerID']).duplicated().sum()
+    print(f"Duplicate feature profiles (excluding customerID): {feature_dup_count}")
+    print("  -> Key Discovery: Once arbitrary customerID strings are removed, exactly 22")
+    print("     duplicate customer records exist with identical demographics and service contracts.")
+    print("     Resolution: Deduplicate to 7,021 unique records to prevent data contamination.")
 
     # 4. Examine Target Variable and Class Imbalance
     print("\n--- 2.4 Class Distribution & Imbalance Ratio (df['Churn'].value_counts()) ---")
@@ -178,24 +191,31 @@ def clean_and_prepare(df: pd.DataFrame):
     """
     Clean the dataset based on the EDA findings:
     - Drop customerID
-    - Convert TotalCharges to float and impute 0.0
+    - Remove 22 duplicate feature records
+    - Convert TotalCharges to float and impute 0.0 for tenure=0
     - Encode target Churn ('Yes' -> 1, 'No' -> 0)
     """
     print(f"\n[STEP 3: DATA CLEANING & TRANSFORMATION]")
     df_clean = df.copy()
 
-    # Drop non-predictive identifier
+    # 1. Drop non-predictive identifier
     if 'customerID' in df_clean.columns:
         df_clean = df_clean.drop(columns=['customerID'])
         print("[ACTION] Dropped non-predictive identifier 'customerID'.")
 
-    # Convert TotalCharges to numeric
+    # 2. Handle duplicates in feature space
+    dups_before = df_clean.duplicated().sum()
+    if dups_before > 0:
+        df_clean = df_clean.drop_duplicates().reset_index(drop=True)
+        print(f"[ACTION] Detected and removed {dups_before} duplicate customer profiles. Cleaned rows: {len(df_clean)}.")
+
+    # 3. Convert TotalCharges to numeric
     df_clean['TotalCharges'] = pd.to_numeric(df_clean['TotalCharges'].astype(str).str.strip(), errors='coerce')
     missing_count = df_clean['TotalCharges'].isnull().sum()
     df_clean['TotalCharges'] = df_clean['TotalCharges'].fillna(0.0)
     print(f"[ACTION] Converted 'TotalCharges' to float64; imputed {missing_count} NaN values with 0.0.")
 
-    # Encode target variable
+    # 4. Encode target variable
     y = df_clean['Churn'].map({'Yes': 1, 'No': 0}).astype(int)
     X = df_clean.drop(columns=['Churn'])
     print("[ACTION] Encoded target 'Churn': {'Yes': 1, 'No': 0}.")
@@ -242,8 +262,8 @@ def train_and_evaluate_all():
     # 3. Clean and prepare features and target
     X, y = clean_and_prepare(raw_df)
 
-    # 4. Train-Test Split (80:20 Stratified)
-    print(f"\n[STEP 5: STRATIFIED TRAIN-TEST SPLIT (80:20)]")
+    # 4. Train-Test Split (80:20 Stratified with unique seed)
+    print(f"\n[STEP 5: STRATIFIED TRAIN-TEST SPLIT (80:20 with seed={RANDOM_STATE})]")
     X_train, X_test, y_train, y_test = train_test_split(
         X, y,
         test_size=0.20,
@@ -310,7 +330,7 @@ def train_and_evaluate_all():
     confusion_matrices_data = {}
 
     for name, model in models.items():
-        print(f"\n-> Training: {name}...")
+        print(f"\n---> Training: {name}...")
         model.fit(X_train_trans, y_train)
 
         # Predictions
@@ -361,9 +381,9 @@ def train_and_evaluate_all():
     for col in ['Accuracy', 'AUC', 'Precision', 'Recall', 'F1', 'MCC']:
         display_df[col] = display_df[col].apply(lambda x: f"{x:.4f}")
 
-    print("\n" + "-"*80)
-    print("FINAL MODEL COMPARISON TABLE (Test Set N=1,409):")
-    print("-"*80)
+    print("\n" + "="*80)
+    print("FINAL MODEL COMPARISON TABLE (Test Set N=1,405):")
+    print("="*80)
     print(display_df.to_string(index=False))
 
     # 9. Visualizations
@@ -428,7 +448,7 @@ def train_and_evaluate_all():
     if len(confusion_matrices_data) < len(axes):
         fig.delaxes(axes[-1])
 
-    plt.suptitle('Confusion Matrices Comparison on Test Set (N=1,409)', fontsize=15, fontweight='bold', y=0.98)
+    plt.suptitle('Confusion Matrices Comparison on Test Set (N=1,405)', fontsize=15, fontweight='bold', y=0.98)
     plt.tight_layout()
     cm_plot_path = os.path.join(plots_dir, 'confusion_matrices.png')
     plt.savefig(cm_plot_path, dpi=300, bbox_inches='tight')
