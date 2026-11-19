@@ -2,13 +2,24 @@
 ## Telco Customer Churn Classification Analysis
 
 ---
-
 **Student Name:** Vignesh K  
 **BITS ID:** 2026CT05053  
 **Course:** Machine Learning  
-**Submission Date:** November 2026 
+**Submission Date:** November 2026   
+**GitHub Repo:** [https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2](https://github.com/Vignesh-k-bits-mtech-ai-ml/ML-CTS-Assignment-2)
 
 ---
+
+### Lab Screenshots
+
+![Problem Statement ScreenShot - Lab](Lab-Screenshots/Problem%20Statement.png)
+
+![Model Exceution and metrics on Lab](Lab-Screenshots/Model%20Execution%20and%20Metrics.png)
+
+![Models Executed in terminal - Lab](Lab-Screenshots/Executed%20as%20py%20file.png)
+---
+
+### README
 
 ## 1. Problem Statement
 
@@ -131,7 +142,7 @@ All data preprocessing operations adhere strictly to statistical best practices 
    - The `TotalCharges` feature had **11 blank string entries** (`" "`) belonging to newly registered subscribers with `tenure = 0`.
    - Converted the column to float using `pd.to_numeric(..., errors='coerce')` and imputed missing values with `0.0` (reflecting zero accumulated charges for tenure 0).
 4. **Stratified Train-Test Split (80:20 with unique seed):**
-   - Performed an 80:20 train-test split (`test_size=0.20`, student-specific `random_state=2026`) with `stratify=y`.
+   - Performed an 80:20 train-test split (`test_size=0.20`, `random_state=2026`) with `stratify=y`.
    - Resulting split: **Training set = 5,616 instances**; **Test set = 1,405 instances**.
    - Class ratios were precisely preserved: 26.48% churn in both training (1,485 churners) and test (372 churners).
    - Exported the raw test split to `test_data.csv` in the root repository.
